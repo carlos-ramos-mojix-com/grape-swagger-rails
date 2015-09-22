@@ -6,9 +6,12 @@
   <%= stylesheet_link_tag 'grape_swagger_rails/application.css' %>
   <%= javascript_include_tag 'grape_swagger_rails/application.js' %>
   <script type="text/javascript">
-	$(function () {
-	  var options = $("html").data('swagger-options');
-
+    $(function () {
+    <% if GrapeSwaggerRails.options.respond_to?(:to_h) %>
+        var options = $("html").data('swagger-options');
+    <% else %>
+        var options = $("html").data('swagger-options').table;
+    <% end %>
     window.swaggerUi = new SwaggerUi({
       url: options.app_url + options.url,
       dom_id: "swagger-ui-container",
